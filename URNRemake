@@ -1,0 +1,65 @@
+for i,v in pairs(game.Players:GetPlayers()) do --Also you can use this like radio or smthng
+local args = {
+    [1] = "rbxassetid://606241996",
+    [2] = 2,
+    [3] = 15,
+    [4] = CFrame.new(v.Character.HumanoidRootPart.Position)
+}
+
+game:GetService("ReplicatedStorage").PlayASound:FireServer(unpack(args))
+end
+
+local lp = game.Players.LocalPlayer
+local uis = game:GetService("UserInputService")
+local door = false
+
+uis.InputBegan:Connect(function(input,gameProcessedEvent)
+if not gameProcessedEvent then
+if input.KeyCode == Enum.KeyCode.P then
+
+local args = {
+    [1] = "GameOver",
+    [2] = true
+}
+
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer(unpack(args))
+
+end
+end
+end)
+
+uis.InputBegan:Connect(function(input,gameProcessedEvent)
+if not gameProcessedEvent then
+if input.KeyCode == Enum.KeyCode.Z then
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Usage",math.huge)
+end
+end
+end)
+
+uis.InputBegan:Connect(function(input,gameProcessedEvent)
+if not gameProcessedEvent then
+if input.KeyCode == Enum.KeyCode.R then
+local ng = game:GetService("Workspace").ServerValues["Night Guard"].Value
+local player = ""
+for i,v in pairs(game.Players:GetPlayers()) do
+if v.Name == ng then
+player = v
+end
+end
+game:GetService("ReplicatedStorage").Monitor:FireServer(CFrame.new(player.Character.HumanoidRootPart.Position))
+end
+end
+end)
+
+uis.InputBegan:Connect(function(input,gameProcessedEvent)
+if not gameProcessedEvent then
+if input.KeyCode == Enum.KeyCode.F then
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Light Error",true)
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("AC Error",true)
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Audio Error",true)
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Door Error",true)
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Camera Error",true)
+game:GetService("ReplicatedStorage").ChangeGameValue:FireServer("Mask Disabled",true)
+end
+end
+end)
